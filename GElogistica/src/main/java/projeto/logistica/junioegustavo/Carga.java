@@ -10,27 +10,29 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import projeto.logistica.junioegustavo.entities.Identificavel;
+
 @Entity
 
-public class Carga {
-	
+public class Carga implements Identificavel {
+
 	@Column
 	@Id
-	private Integer idCarga;
-	@OneToMany(mappedBy="carga")
+	private Long id;
+	@OneToMany(mappedBy = "carga")
 	private Set<Pedido> pedidos;
 	private Double volumecarga;
 	private Double precoCarga;
 	@OneToOne
-	@JoinColumn(name="responsabilidade")
+	@JoinColumn(name = "responsabilidade")
 	private Funcionario responsavel;
 
-	public Integer getIdCarga() {
-		return idCarga;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdCarga(Integer idCarga) {
-		this.idCarga = idCarga;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Set<Pedido> getPedidos() {

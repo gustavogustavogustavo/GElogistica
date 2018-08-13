@@ -4,13 +4,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import projeto.logistica.junioegustavo.entities.Identificavel;
+
 @Entity
 
-public class Fornecedor {
+public class Fornecedor implements Identificavel {
 	@Column
 	private String nomeFornecedor;
 	@Id
-	private Integer idFornecedor;
+	private Long id;
 	private String email;
 	private String telefone;
 	private String endereço;
@@ -23,12 +25,12 @@ public class Fornecedor {
 		this.nomeFornecedor = nomeFornecedor;
 	}
 
-	public Integer getIdFornecedor() {
-		return idFornecedor;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdFornecedor(Integer idFornecedor) {
-		this.idFornecedor = idFornecedor;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getEmail() {

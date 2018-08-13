@@ -7,24 +7,26 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import projeto.logistica.junioegustavo.entities.Identificavel;
+
 @Entity
-public class Cliente {
+public class Cliente implements Identificavel {
 
 	@Column
 	@Id
-	private Integer idCliente;
+	private Long id;
 	private String nomeCliente;
 	private String contatoCliente;
 	private String emailCliente;
 	@OneToMany(mappedBy="destinatario")
 	private Set<Pedido> pedidos;
 
-	public Integer getIdCliente() {
-		return idCliente;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdCliente(Integer idCliente) {
-		this.idCliente = idCliente;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNomeCliente() {

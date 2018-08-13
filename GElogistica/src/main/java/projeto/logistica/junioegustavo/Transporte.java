@@ -9,11 +9,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import projeto.logistica.junioegustavo.entities.Identificavel;
+
 @Entity
 
-public class Transporte {
+public class Transporte implements Identificavel{
 	@Id
-	private Integer idTransporte;
+	private Long id;
 	@OneToMany(mappedBy="transporte")
 	private Set<Funcionario> funcionario;
 	@OneToOne
@@ -67,12 +69,12 @@ public class Transporte {
 		this.carga = carga;
 	}
 
-	public Integer getIdTransporte() {
-		return idTransporte;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdTransporte(Integer idTransporte) {
-		this.idTransporte = idTransporte;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Set<Funcionario> getFuncionario() {

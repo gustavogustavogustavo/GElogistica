@@ -8,15 +8,17 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import projeto.logistica.junioegustavo.entities.Identificavel;
+
 @Entity
 
-public class Produto {
+public class Produto implements Identificavel {
 
 	@Column
 	private String nomeProduto;
 	private String desc;
 	@Id
-	private Integer idProduto;
+	private Long id;
 	private Double precoProduto;
 	private Double volumeOcupado;
 	@ManyToOne
@@ -42,12 +44,12 @@ public class Produto {
 		this.desc = desc;
 	}
 
-	public Integer getIdProduto() {
-		return idProduto;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdProduto(Integer idProduto) {
-		this.idProduto = idProduto;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Double getPreco() {

@@ -9,13 +9,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import projeto.logistica.junioegustavo.entities.Identificavel;
+
 @Entity
 
-public class Pedido {
+public class Pedido implements Identificavel {
 
 	@Column
 	@Id
-	private Integer idPedido;
+	private Long id;
 	@OneToMany(mappedBy = "produto")
 	private Set<Produto> pedido;
 	@ManyToOne
@@ -28,12 +30,12 @@ public class Pedido {
 	private Double valorPedido;
 	private Double volumePedido;
 
-	public Integer getIdPedido() {
-		return idPedido;
+	public Long getId() {
+		return id;
 	}
 
-	public void setId(Integer idPedido) {
-		this.idPedido = idPedido;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Cliente getDestinatario() {

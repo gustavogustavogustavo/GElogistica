@@ -1,8 +1,6 @@
 package projeto.logistica.junioegustavo;
 
 import java.util.ArrayList;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,7 +12,7 @@ public class Trajeto {
 	@Column
 	@Id
 	private Integer idTrajeto;
-	private Set<String> cidades;
+	private ArrayList<String> cidades;
 	private Double custo;
 
 	public Integer getIdTrajeto() {
@@ -25,11 +23,11 @@ public class Trajeto {
 		this.idTrajeto = idTrajeto;
 	}
 
-	public Set<String> getCidades() {
+	public ArrayList<String> getCidades() {
 		return cidades;
 	}
 
-	public void setCidades(Set<String> cidades) {
+	public void setCidades(ArrayList<String> cidades) {
 		this.cidades = cidades;
 	}
 

@@ -6,14 +6,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import projeto.logistica.junioegustavo.entities.Identificavel;
+
 @Entity
  
-public class Funcionario {
+public class Funcionario implements Identificavel {
 
 	@Column
 	private String nomeFuncionario;
 	@Id
-	private Integer idFuncionario;
+	private Long id;
 	private String funcao;
 	private Double salario;
 	@ManyToOne
@@ -28,12 +30,12 @@ public class Funcionario {
 		this.nomeFuncionario = nomeFuncionario;
 	}
 
-	public Integer getIdFuncionario() {
-		return idFuncionario;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdFuncionario(Integer idFuncionario) {
-		this.idFuncionario = idFuncionario;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getFuncao() {
