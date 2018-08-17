@@ -14,7 +14,7 @@ public class FuncionarioBean {
 
 	private ArrayList<Funcionario> funcionarios;
 	private Funcionario funcionario;
-	private Integer idAtual;
+	private Long idAtual;
 	private boolean atualizando;
 
 	public ArrayList<Funcionario> getFuncionarios() {
@@ -33,11 +33,11 @@ public class FuncionarioBean {
 		this.funcionario = funcionario;
 	}
 
-	public Integer getIdAtual() {
+	public Long getIdAtual() {
 		return idAtual;
 	}
 
-	public void setIdAtual(Integer idAtual) {
+	public void setIdAtual(Long idAtual) {
 		this.idAtual = idAtual;
 	}
 
@@ -52,7 +52,7 @@ public class FuncionarioBean {
 public FuncionarioBean() {
 	funcionario = new Funcionario();
 	funcionarios = new ArrayList<Funcionario>();
-	idAtual = 0;
+	idAtual = 0l;
 	atualizando = false;
 }
 
@@ -64,7 +64,7 @@ public FuncionarioBean() {
 				}
 			}
 		} else {
-			funcionario.setIdFuncionario(idAtual);
+			funcionario.setId(idAtual);
 			funcionarios.add(funcionario);
 			funcionario = new Funcionario();
 			idAtual += 1;
@@ -72,26 +72,26 @@ public FuncionarioBean() {
 		atualizando = false;
 	}
 
-	public void removeFornecedor(Integer idFuncionario) {
+	public void removeFornecedor(Integer id) {
 		for (Funcionario funcionario : funcionarios) {
-			if (funcionario.getIdFuncionario().equals(idFuncionario)) {
+			if (funcionario.getId().equals(id)) {
 				funcionarios.remove(funcionario);
 			}
 		}
 	}
 
-	public void atualizarFornecedor(Integer idFuncionario) {
+	public void atualizarFornecedor(Integer id) {
 		for (Funcionario funcionario : funcionarios) {
-			if (funcionario.getIdFuncionario().equals(idFuncionario)) {
+			if (funcionario.getId().equals(id)) {
 				this.funcionario = funcionario;
 				atualizando = true;
 			}
 		}
 	}
 
-	public String buscarFuncionario(Integer idFuncionario) {
+	public String buscarFuncionario(Integer id) {
 		for (Funcionario funcionario : funcionarios) {
-			if (funcionario.getIdFuncionario().equals(idFuncionario)) {
+			if (funcionario.getId().equals(id)) {
 				return funcionario.toString();
 			}
 		}

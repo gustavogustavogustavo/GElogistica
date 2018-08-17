@@ -13,7 +13,7 @@ public class ClienteBean {
 
 	private ArrayList<Cliente> clientes;
 	private Cliente cliente;
-	private Integer idAtual;
+	private Long idAtual;
 	private boolean atualizando;
 
 	public ArrayList<Cliente> getClientes() {
@@ -32,11 +32,11 @@ public class ClienteBean {
 		this.cliente = cliente;
 	}
 
-	public Integer getIdAtual() {
+	public Long getIdAtual() {
 		return idAtual;
 	}
 
-	public void setIdAtual(Integer idAtual) {
+	public void setIdAtual(Long idAtual) {
 		this.idAtual = idAtual;
 	}
 
@@ -51,7 +51,7 @@ public class ClienteBean {
 	public ClienteBean() {
 		cliente = new Cliente();
 		clientes = new ArrayList<Cliente>();
-		idAtual = 0;
+		idAtual = 0l;
 		atualizando = false;
 	}
 
@@ -63,7 +63,7 @@ public class ClienteBean {
 				}
 			}
 		} else {
-			cliente.setIdCliente(idAtual);
+			cliente.setId(idAtual);
 			clientes.add(cliente);
 			cliente = new Cliente();
 			idAtual += 1;
@@ -71,26 +71,26 @@ public class ClienteBean {
 		atualizando = false;
 	}
 
-	public void removeCliente(Integer idCliente) {
+	public void removeCliente(Long id) {
 		for (Cliente cliente : clientes) {
-			if (cliente.getIdCliente().equals(idCliente)) {
+			if (cliente.getId().equals(id)) {
 				clientes.remove(cliente);
 			}
 		}
 	}
 
-	public void atualizarFornecedor(Integer idCliente) {
+	public void atualizarFornecedor(Long id) {
 		for (Cliente cliente : clientes) {
-			if (cliente.getIdCliente().equals(idCliente)) {
+			if (cliente.getId().equals(id)) {
 				this.cliente = cliente;
 				atualizando = true;
 			}
 		}
 	}
 
-	public String buscarFornecedor(Integer idCliente) {
+	public String buscarFornecedor(Long id) {
 		for (Cliente cliente : clientes) {
-			if (cliente.getIdCliente().equals(idCliente)) {
+			if (cliente.getId().equals(id)) {
 				return cliente.toString();
 			}
 		}

@@ -5,22 +5,24 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import projeto.logistica.junioegustavo.entities.Identificavel;
+
 @Entity
 
-public class Trajeto {
+public class Trajeto implements Identificavel{
 
 	@Column
 	@Id
-	private Integer idTrajeto;
+	private Long id;
 	private ArrayList<String> cidades;
 	private Double custo;
 
-	public Integer getIdTrajeto() {
-		return idTrajeto;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdTrajeto(Integer idTrajeto) {
-		this.idTrajeto = idTrajeto;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public ArrayList<String> getCidades() {

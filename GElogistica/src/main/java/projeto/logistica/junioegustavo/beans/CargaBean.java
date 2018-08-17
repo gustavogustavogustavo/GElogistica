@@ -35,26 +35,26 @@ public class CargaBean {
 		carga = new Carga();
 	}
 
-	public void removeCarga(Integer idCarga) {
+	public void removeCarga(Long id) {
 		for (Carga carga : cargas) {
-			if (carga.getIdCarga() == idCarga) {
+			if (carga.getId() == id) {
 				cargas.remove(carga);
 			}
 		}
 	}
 
-	public String buscarCarga(Integer idCarga) {
+	public String buscarCarga(Long id) {
 		for (Carga carga : cargas) {
-			if (carga.getIdCarga() == idCarga) {
+			if (carga.getId() == id) {
 				return carga.toString();
 			}
 		}
 		return null;
 	}
 	
-	public void atualizarCarga(Integer idCarga) {
+	public void atualizarCarga(Long id) {
 		for (Carga carga : cargas) {
-			if (carga.getIdCarga() == idCarga) {
+			if (carga.getId() == id) {
 				this.carga = carga;
 	}
 		}

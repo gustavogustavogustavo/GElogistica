@@ -64,10 +64,10 @@
 			<p:column>
 				<f:facet name="header">Opções</f:facet>
 				<p:commandButton id="btnRemoveBotao" value="Remover"
-					actionListener="#{fornecedorBean.removeFornecedor(fornecedor.idFornecedor)}"
+					actionListener="#{fornecedorBean.removeFornecedor(fornecedor.id)}"
 					ajax="false" />
 				<p:commandButton id="btnUpdateBotao" value="Atualizar"
-					actionListener="#{fornecedorBean.atualizarFornecedor(fornecedor.idFornecedor)}"
+					actionListener="#{fornecedorBean.atualizarFornecedor(fornecedor.id)}"
 					ajax="false" />
 			</p:column>
 		</p:dataTable>

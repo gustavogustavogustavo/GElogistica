@@ -13,7 +13,7 @@ import projeto.logistica.junioegustavo.Produto;
 public class ProdutoBean {
 	private ArrayList<Produto> produtos;
 	private Produto produto;
-	private Integer idAtual;
+	private Long idAtual;
 	private boolean atualizando;
 	
 	public void addProduto() {
@@ -24,7 +24,7 @@ public class ProdutoBean {
 				}
 			}
 		} else {
-			produto.setIdProduto(idAtual);
+			produto.setId(idAtual);
 			produtos.add(produto);
 			produto = new Produto();
 			idAtual += 1;
@@ -32,27 +32,27 @@ public class ProdutoBean {
 		atualizando=false;
 	}
 
-	public void removeProduto(Integer idTrajeto) {
+	public void removeProduto(Long id) {
 		for (Produto produto : produtos) {
-			if (produto.getIdProduto().equals(idTrajeto)) {
+			if (produto.getId().equals(id)) {
 				produtos.remove(produto);
 				return;
 			}
 		}
 	}
 
-	public void atualizarProdutos(Integer idProduto) {
+	public void atualizarProdutos(Integer id) {
 		for (Produto produto : produtos) {
-			if (produto.getIdProduto().equals(idProduto)) {
+			if (produto.getId().equals(id)) {
 				this.produto = produto;
 				atualizando = true;
 			}
 		}
 	}
 
-	public String buscarProduto(Integer idProduto) {
+	public String buscarProduto(Integer id) {
 		for (Produto produto : produtos) {
-			if (produto.getIdProduto().equals(idProduto)) {
+			if (produto.getId().equals(id)) {
 				return produto.toString();
 			}
 		}

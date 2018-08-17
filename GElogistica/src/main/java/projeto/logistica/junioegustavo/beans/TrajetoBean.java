@@ -11,7 +11,7 @@ import projeto.logistica.junioegustavo.Trajeto;
 public class TrajetoBean {
 	private ArrayList<Trajeto> trajetos;
 	private Trajeto trajeto;
-	private Integer idAtual;
+	private Long idAtual;
 	private boolean atualizando;
 
 	public ArrayList<Trajeto> getTrajetos() {
@@ -30,11 +30,11 @@ public class TrajetoBean {
 		this.trajeto = trajeto;
 	}
 
-	public Integer getIdAtual() {
+	public Long getIdAtual() {
 		return idAtual;
 	}
 
-	public void setIdAtual(Integer idAtual) {
+	public void setIdAtual(Long idAtual) {
 		this.idAtual = idAtual;
 	}
 
@@ -49,7 +49,7 @@ public class TrajetoBean {
 	public TrajetoBean() {
 		trajeto = new Trajeto();
 		trajetos = new ArrayList<Trajeto>();
-		idAtual = 0;
+		idAtual = 0l;
 		atualizando = false;
 	}
 
@@ -61,7 +61,7 @@ public class TrajetoBean {
 				}
 			}
 		} else {
-			trajeto.setIdTrajeto(idAtual);
+			trajeto.setId(idAtual);
 			trajetos.add(trajeto);
 			trajeto = new Trajeto();
 			idAtual += 1;
@@ -69,26 +69,26 @@ public class TrajetoBean {
 		atualizando = false;
 	}
 
-	public void removeTrajeto(Integer idTrajeto) {
+	public void removeTrajeto(Long id) {
 		for (Trajeto trajeto : trajetos) {
-			if (trajeto.getIdTrajeto().equals(idTrajeto)) {
+			if (trajeto.getId().equals(id)) {
 				trajetos.remove(trajeto);
 			}
 		}
 	}
 
-	public void atualizarTrajeto(Integer idTrajeto) {
+	public void atualizarTrajeto(Long id) {
 		for (Trajeto trajeto : trajetos) {
-			if (trajeto.getIdTrajeto().equals(idTrajeto)) {
+			if (trajeto.getId().equals(id)) {
 				this.trajeto = trajeto;
 				atualizando = true;
 			}
 		}
 	}
 
-	public String buscarTrajeto(Integer idTrajeto) {
+	public String buscarTrajeto(Long id) {
 		for (Trajeto trajeto : trajetos) {
-			if (trajeto.getIdTrajeto().equals(idTrajeto)) {
+			if (trajeto.getId().equals(id)) {
 				return trajeto.toString();
 			}
 		}

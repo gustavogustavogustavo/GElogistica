@@ -1,4 +1,4 @@
-package projeto.logistica.juniuegustavo.util;
+package projeto.logistica.junioegustavo.util;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

@@ -1,4 +1,4 @@
-package projeto.logistica.juniuegustavo.util;
+package projeto.logistica.junioegustavo.util;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;

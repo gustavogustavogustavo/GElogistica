@@ -1,4 +1,4 @@
-package projeto.logistica.juniuegustavo.util;
+package projeto.logistica.junioegustavo.util;
 
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;

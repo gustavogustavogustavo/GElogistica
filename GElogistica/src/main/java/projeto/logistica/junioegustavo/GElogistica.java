@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-public class GElogistica {
+public class GElogistica  {
 	private EntityManager manager;
 
 	public GElogistica() {

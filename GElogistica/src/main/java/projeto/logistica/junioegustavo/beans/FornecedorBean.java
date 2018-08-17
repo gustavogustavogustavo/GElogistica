@@ -12,7 +12,7 @@ import projeto.logistica.junioegustavo.Fornecedor;
 public class FornecedorBean {
 	private ArrayList<Fornecedor> fornecedores;
 	private Fornecedor fornecedor;
-	private Integer idAtual;
+	private Long idAtual;
 	private boolean atualizando;
 
 	public ArrayList<Fornecedor> getFornecedores() {
@@ -34,7 +34,7 @@ public class FornecedorBean {
 	public FornecedorBean() {
 		fornecedor = new Fornecedor();
 		fornecedores = new ArrayList<Fornecedor>();
-		idAtual = 0;
+		idAtual = 0l;
 		atualizando = false;
 	}
 
@@ -46,7 +46,7 @@ public class FornecedorBean {
 				}
 			}
 		} else {
-			fornecedor.setIdFornecedor(idAtual);
+			fornecedor.setId(idAtual);
 			fornecedores.add(fornecedor);
 			fornecedor = new Fornecedor();
 			idAtual += 1;
@@ -54,27 +54,27 @@ public class FornecedorBean {
 		atualizando=false;
 	}
 
-	public void removeFornecedor(Integer idFornecedor) {
+	public void removeFornecedor(Long id) {
 		for (Fornecedor fornecedor : fornecedores) {
-			if (fornecedor.getIdFornecedor().equals(idFornecedor)) {
+			if (fornecedor.getId().equals(id)) {
 				fornecedores.remove(fornecedor);
 				return;
 			}
 		}
 	}
 
-	public void atualizarFornecedor(Integer idFornecedor) {
+	public void atualizarFornecedor(Long id) {
 		for (Fornecedor fornecedor : fornecedores) {
-			if (fornecedor.getIdFornecedor().equals(idFornecedor)) {
+			if (fornecedor.getId().equals(id)) {
 				this.fornecedor = fornecedor;
 				atualizando = true;
 			}
 		}
 	}
 
-	public String buscarFornecedor(Integer idFornecedor) {
+	public String buscarFornecedor(Long id) {
 		for (Fornecedor fornecedor : fornecedores) {
-			if (fornecedor.getIdFornecedor().equals(idFornecedor)) {
+			if (fornecedor.getId().equals(id)) {
 				return fornecedor.toString();
 			}
 		}
