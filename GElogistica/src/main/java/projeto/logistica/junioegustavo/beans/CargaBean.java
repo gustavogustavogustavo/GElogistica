@@ -3,12 +3,13 @@ package projeto.logistica.junioegustavo.beans;
 import java.util.ArrayList;
 
 import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
+import javax.inject.Named;
 
-import projeto.logistica.junioegustavo.Carga;
+import projeto.logistica.junioegustavo.entities.Carga;
 
-@ManagedBean
+
 @ApplicationScoped
+@Named
 public class CargaBean {
 
 	private ArrayList<Carga> cargas;

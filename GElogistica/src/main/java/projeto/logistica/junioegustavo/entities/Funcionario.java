@@ -1,4 +1,4 @@
-package projeto.logistica.junioegustavo;
+package projeto.logistica.junioegustavo.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
