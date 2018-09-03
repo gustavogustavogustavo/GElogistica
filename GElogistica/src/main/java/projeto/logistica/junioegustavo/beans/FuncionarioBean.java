@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
-import projeto.logistica.junioegustavo.Funcionario;
+import projeto.logistica.junioegustavo.entities.Funcionario;
 
 @ManagedBean
 @ApplicationScoped
