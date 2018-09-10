@@ -1,68 +1,79 @@
 package projeto.logistica.junioegustavo.beans;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import projeto.logistica.junioegustavo.entities.Carga;
+import projeto.logistica.junioegustavo.services.CargaService;
 
 
 @ApplicationScoped
 @Named
 public class CargaBean {
-
-	private ArrayList<Carga> cargas;
-	private Carga carga;
-
-	public ArrayList<Carga> getCargas() {
-		return cargas;
-	}
-
-	public void setCargas(ArrayList<Carga> cargas) {
-		this.cargas = cargas;
-	}
-
-	public Carga getCarga() {
-		return carga;
-	}
-
-	public void setCarga(Carga carga) {
-		this.carga = carga;
-	}
-
-	public void addCarga() {
-		cargas.add(carga);
-		carga = new Carga();
-	}
-
-	public void removeCarga(Long id) {
-		for (Carga carga : cargas) {
-			if (carga.getId() == id) {
-				cargas.remove(carga);
-			}
-		}
-	}
-
-	public String buscarCarga(Long id) {
-		for (Carga carga : cargas) {
-			if (carga.getId() == id) {
-				return carga.toString();
-			}
-		}
-		return null;
-	}
 	
-	public void atualizarCarga(Long id) {
-		for (Carga carga : cargas) {
-			if (carga.getId() == id) {
-				this.carga = carga;
-	}
-		}
-	}
+	@Inject
+	private CargaService service;
+
+	protected Carga entidade;
+
+	protected Collection<Carga> entidades;
 
 	public CargaBean() {
-		carga = new Carga();
+	}
+	
+	@PostConstruct
+	public void init() {
+		entidade = newEntidade();
+		entidades = getService().getAll();
+	}
+	
+	public void remove(Carga entidade) {
+		getService().remove(entidade);
+		limpar();
+	}
+
+	public Carga getEntidade() {
+		return entidade;
+	}
+
+	public void setEntidade(Carga entidade) {
+		this.entidade = entidade;
+	}
+
+	public Collection<Carga> getEntidades() {
+		return entidades;
+	}
+
+	public void setEntidades(Collection<Carga> entidades) {
+		this.entidades = entidades;
+	}
+
+	public void save() {
+		getService().save(entidade);
+		limpar();
+	}
+
+	public void editar(Long id) {
+		this.getEntidade().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		entidades = getService().getAll();
+		entidade = newEntidade();
+	}
+
+	protected Carga newEntidade() {
+		return new Carga();
+	}
+
+	public CargaService getService() {
+		return service;
 	}
 
 }

@@ -1,100 +1,78 @@
 package projeto.logistica.junioegustavo.beans;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import projeto.logistica.junioegustavo.entities.Cliente;
+import projeto.logistica.junioegustavo.services.ClienteService;
 
-@ManagedBean
+@Named
 @ApplicationScoped
 public class ClienteBean {
 
-	private ArrayList<Cliente> clientes;
-	private Cliente cliente;
-	private Long idAtual;
-	private boolean atualizando;
+	@Inject
+	private ClienteService service;
+	
+	protected Cliente entidade;
 
-	public ArrayList<Cliente> getClientes() {
-		return clientes;
-	}
-
-	public void setClientes(ArrayList<Cliente> clientes) {
-		this.clientes = clientes;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-	public Long getIdAtual() {
-		return idAtual;
-	}
-
-	public void setIdAtual(Long idAtual) {
-		this.idAtual = idAtual;
-	}
-
-	public boolean isAtualizando() {
-		return atualizando;
-	}
-
-	public void setAtualizando(boolean atualizando) {
-		this.atualizando = atualizando;
-	}
+	protected Collection<Cliente> entidades;
 
 	public ClienteBean() {
-		cliente = new Cliente();
-		clientes = new ArrayList<Cliente>();
-		idAtual = 0l;
-		atualizando = false;
+	}
+	
+	@PostConstruct
+	public void init() {
+		entidade = newEntidade();
+		entidades = getService().getAll();
+	}
+	
+	public void remove(Cliente entidade) {
+		getService().remove(entidade);
+		limpar();
 	}
 
-	public void addCliente() {
-		if (atualizando) {
-			for (Cliente cliente : clientes) {
-				if (cliente.equals(this.cliente)) {
-					cliente = this.cliente;
-				}
-			}
-		} else {
-			cliente.setId(idAtual);
-			clientes.add(cliente);
-			cliente = new Cliente();
-			idAtual += 1;
-		}
-		atualizando = false;
+	public Cliente getEntidade() {
+		return entidade;
 	}
 
-	public void removeCliente(Long id) {
-		for (Cliente cliente : clientes) {
-			if (cliente.getId().equals(id)) {
-				clientes.remove(cliente);
-			}
-		}
+	public void setEntidade(Cliente entidade) {
+		this.entidade = entidade;
 	}
 
-	public void atualizarFornecedor(Long id) {
-		for (Cliente cliente : clientes) {
-			if (cliente.getId().equals(id)) {
-				this.cliente = cliente;
-				atualizando = true;
-			}
-		}
+	public Collection<Cliente> getEntidades() {
+		return entidades;
 	}
 
-	public String buscarFornecedor(Long id) {
-		for (Cliente cliente : clientes) {
-			if (cliente.getId().equals(id)) {
-				return cliente.toString();
-			}
-		}
-		return null;
+	public void setEntidades(Collection<Cliente> entidades) {
+		this.entidades = entidades;
+	}
+
+	public void save() {
+		getService().save(entidade);
+		limpar();
+	}
+
+	public void editar(Long id) {
+		this.getEntidade().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		entidades = getService().getAll();
+		entidade = newEntidade();
+	}
+
+	protected Cliente newEntidade() {
+		return new Cliente();
+	}
+
+	public ClienteService getService() {
+		return service;
 	}
 
 }

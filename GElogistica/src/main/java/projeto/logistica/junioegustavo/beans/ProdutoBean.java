@@ -1,61 +1,79 @@
 package projeto.logistica.junioegustavo.beans;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import projeto.logistica.junioegustavo.entities.Produto;
+import projeto.logistica.junioegustavo.services.ProdutoService;
 
-@ManagedBean
+@Named
 @ApplicationScoped
 
 public class ProdutoBean {
-	private ArrayList<Produto> produtos;
-	private Produto produto;
-	private Long idAtual;
-	private boolean atualizando;
 	
-	public void addProduto() {
-		if (atualizando) {
-			for (Produto produto : produtos) {
-				if (produto.equals(this.produto)) {
-					produto = this.produto;
-				}
-			}
-		} else {
-			produto.setId(idAtual);
-			produtos.add(produto);
-			produto = new Produto();
-			idAtual += 1;
-		}
-		atualizando=false;
+	@Inject
+	private ProdutoService service;
+	
+	protected Produto entidade;
+
+	protected Collection<Produto> entidades;
+
+	public ProdutoBean() {
+	}
+	
+	@PostConstruct
+	public void init() {
+		entidade = newEntidade();
+		entidades = getService().getAll();
+	}
+	
+	public void remove(Produto entidade) {
+		getService().remove(entidade);
+		limpar();
 	}
 
-	public void removeProduto(Long id) {
-		for (Produto produto : produtos) {
-			if (produto.getId().equals(id)) {
-				produtos.remove(produto);
-				return;
-			}
-		}
+	public Produto getEntidade() {
+		return entidade;
 	}
 
-	public void atualizarProdutos(Integer id) {
-		for (Produto produto : produtos) {
-			if (produto.getId().equals(id)) {
-				this.produto = produto;
-				atualizando = true;
-			}
-		}
+	public void setEntidade(Produto entidade) {
+		this.entidade = entidade;
 	}
 
-	public String buscarProduto(Integer id) {
-		for (Produto produto : produtos) {
-			if (produto.getId().equals(id)) {
-				return produto.toString();
-			}
-		}
-		return null;
+	public Collection<Produto> getEntidades() {
+		return entidades;
+	}
+
+	public void setEntidades(Collection<Produto> entidades) {
+		this.entidades = entidades;
+	}
+
+	public void save() {
+		getService().save(entidade);
+		limpar();
+	}
+
+	public void editar(Long id) {
+		this.getEntidade().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		entidades = getService().getAll();
+		entidade = newEntidade();
+	}
+
+	protected Produto newEntidade() {
+		return new Produto();
+	}
+
+	public ProdutoService getService() {
+		return service;
 	}
 }

@@ -1,101 +1,80 @@
 package projeto.logistica.junioegustavo.beans;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import projeto.logistica.junioegustavo.entities.Funcionario;
+import projeto.logistica.junioegustavo.services.FuncionarioService;
 
-@ManagedBean
+@Named
 @ApplicationScoped
 
 public class FuncionarioBean {
+	
+	@Inject
+	private FuncionarioService service;
 
-	private ArrayList<Funcionario> funcionarios;
-	private Funcionario funcionario;
-	private Long idAtual;
-	private boolean atualizando;
+	protected Funcionario entidade;
 
-	public ArrayList<Funcionario> getFuncionarios() {
-		return funcionarios;
+	protected Collection<Funcionario> entidades;
+
+	public FuncionarioBean() {
+	}
+	
+	@PostConstruct
+	public void init() {
+		entidade = newEntidade();
+		entidades = getService().getAll();
+	}
+	
+	public void remove(Funcionario entidade) {
+		getService().remove(entidade);
+		limpar();
 	}
 
-	public void setFuncionarios(ArrayList<Funcionario> funcionarios) {
-		this.funcionarios = funcionarios;
+	public Funcionario getEntidade() {
+		return entidade;
 	}
 
-	public Funcionario getFuncionario() {
-		return funcionario;
+	public void setEntidade(Funcionario entidade) {
+		this.entidade = entidade;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
+	public Collection<Funcionario> getEntidades() {
+		return entidades;
 	}
 
-	public Long getIdAtual() {
-		return idAtual;
+	public void setEntidades(Collection<Funcionario> entidades) {
+		this.entidades = entidades;
 	}
 
-	public void setIdAtual(Long idAtual) {
-		this.idAtual = idAtual;
+	public void save() {
+		getService().save(entidade);
+		limpar();
 	}
 
-	public boolean isAtualizando() {
-		return atualizando;
+	public void editar(Long id) {
+		this.getEntidade().setId(id);
+		save();
 	}
 
-	public void setAtualizando(boolean atualizando) {
-		this.atualizando = atualizando;
+	public void limpar() {
+		entidades = getService().getAll();
+		entidade = newEntidade();
 	}
 
-public FuncionarioBean() {
-	funcionario = new Funcionario();
-	funcionarios = new ArrayList<Funcionario>();
-	idAtual = 0l;
-	atualizando = false;
-}
-
-	public void addFornecedor() {
-		if (atualizando) {
-			for (Funcionario funcionario : funcionarios) {
-				if (funcionario.equals(this.funcionario)) {
-					funcionario = this.funcionario;
-				}
-			}
-		} else {
-			funcionario.setId(idAtual);
-			funcionarios.add(funcionario);
-			funcionario = new Funcionario();
-			idAtual += 1;
-		}
-		atualizando = false;
+	protected Funcionario newEntidade() {
+		return new Funcionario();
 	}
 
-	public void removeFornecedor(Integer id) {
-		for (Funcionario funcionario : funcionarios) {
-			if (funcionario.getId().equals(id)) {
-				funcionarios.remove(funcionario);
-			}
-		}
-	}
-
-	public void atualizarFornecedor(Integer id) {
-		for (Funcionario funcionario : funcionarios) {
-			if (funcionario.getId().equals(id)) {
-				this.funcionario = funcionario;
-				atualizando = true;
-			}
-		}
-	}
-
-	public String buscarFuncionario(Integer id) {
-		for (Funcionario funcionario : funcionarios) {
-			if (funcionario.getId().equals(id)) {
-				return funcionario.toString();
-			}
-		}
-		return null;
+	public FuncionarioService getService() {
+		return service;
 	}
 
 }

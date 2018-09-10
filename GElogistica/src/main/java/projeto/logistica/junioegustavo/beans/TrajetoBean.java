@@ -1,97 +1,78 @@
 package projeto.logistica.junioegustavo.beans;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import projeto.logistica.junioegustavo.entities.Trajeto;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-@ManagedBean
+import projeto.logistica.junioegustavo.entities.Trajeto;
+import projeto.logistica.junioegustavo.services.TrajetoService;
+
+@Named
 @ApplicationScoped
 public class TrajetoBean {
-	private ArrayList<Trajeto> trajetos;
-	private Trajeto trajeto;
-	private Long idAtual;
-	private boolean atualizando;
+	
+	@Inject 
+	private TrajetoService service;
+	
+	protected Trajeto entidade;
 
-	public ArrayList<Trajeto> getTrajetos() {
-		return trajetos;
-	}
-
-	public void setTrajetos(ArrayList<Trajeto> trajetos) {
-		this.trajetos = trajetos;
-	}
-
-	public Trajeto getTrajeto() {
-		return trajeto;
-	}
-
-	public void setTrajeto(Trajeto trajeto) {
-		this.trajeto = trajeto;
-	}
-
-	public Long getIdAtual() {
-		return idAtual;
-	}
-
-	public void setIdAtual(Long idAtual) {
-		this.idAtual = idAtual;
-	}
-
-	public boolean isAtualizando() {
-		return atualizando;
-	}
-
-	public void setAtualizando(boolean atualizando) {
-		this.atualizando = atualizando;
-	}
+	protected Collection<Trajeto> entidades;
 
 	public TrajetoBean() {
-		trajeto = new Trajeto();
-		trajetos = new ArrayList<Trajeto>();
-		idAtual = 0l;
-		atualizando = false;
+	}
+	
+	@PostConstruct
+	public void init() {
+		entidade = newEntidade();
+		entidades = getService().getAll();
+	}
+	
+	public void remove(Trajeto entidade) {
+		getService().remove(entidade);
+		limpar();
 	}
 
-	public void addTrajeto() {
-		if (atualizando) {
-			for (Trajeto trajeto : trajetos) {
-				if (trajeto.equals(this.trajeto)) {
-					trajeto = this.trajeto;
-				}
-			}
-		} else {
-			trajeto.setId(idAtual);
-			trajetos.add(trajeto);
-			trajeto = new Trajeto();
-			idAtual += 1;
-		}
-		atualizando = false;
+	public Trajeto getEntidade() {
+		return entidade;
 	}
 
-	public void removeTrajeto(Long id) {
-		for (Trajeto trajeto : trajetos) {
-			if (trajeto.getId().equals(id)) {
-				trajetos.remove(trajeto);
-			}
-		}
+	public void setEntidade(Trajeto entidade) {
+		this.entidade = entidade;
 	}
 
-	public void atualizarTrajeto(Long id) {
-		for (Trajeto trajeto : trajetos) {
-			if (trajeto.getId().equals(id)) {
-				this.trajeto = trajeto;
-				atualizando = true;
-			}
-		}
+	public Collection<Trajeto> getEntidades() {
+		return entidades;
 	}
 
-	public String buscarTrajeto(Long id) {
-		for (Trajeto trajeto : trajetos) {
-			if (trajeto.getId().equals(id)) {
-				return trajeto.toString();
-			}
-		}
-		return null;
+	public void setEntidades(Collection<Trajeto> entidades) {
+		this.entidades = entidades;
+	}
+
+	public void save() {
+		getService().save(entidade);
+		limpar();
+	}
+
+	public void editar(Long id) {
+		this.getEntidade().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		entidades = getService().getAll();
+		entidade = newEntidade();
+	}
+
+	protected Trajeto newEntidade() {
+		return new Trajeto();
+	}
+
+	public TrajetoService getService() {
+		return service;
 	}
 }

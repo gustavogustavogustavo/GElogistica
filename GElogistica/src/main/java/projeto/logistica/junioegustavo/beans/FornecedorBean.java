@@ -1,84 +1,80 @@
 package projeto.logistica.junioegustavo.beans;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import projeto.logistica.junioegustavo.entities.Fornecedor;
+import projeto.logistica.junioegustavo.services.FornecedorService;
 
-@ManagedBean
+@Named
 @ApplicationScoped
 public class FornecedorBean {
-	private ArrayList<Fornecedor> fornecedores;
-	private Fornecedor fornecedor;
-	private Long idAtual;
-	private boolean atualizando;
+	
+	@Inject
+	private FornecedorService service;
+	
+	protected Fornecedor entidade;
 
-	public ArrayList<Fornecedor> getFornecedores() {
-		return fornecedores;
-	}
-
-	public void setFornecedores(ArrayList<Fornecedor> fornecedores) {
-		this.fornecedores = fornecedores;
-	}
-
-	public Fornecedor getFornecedor() {
-		return fornecedor;
-	}
-
-	public void setFornecedor(Fornecedor fornecedor) {
-		this.fornecedor = fornecedor;
-	}
+	protected Collection<Fornecedor> entidades;
 
 	public FornecedorBean() {
-		fornecedor = new Fornecedor();
-		fornecedores = new ArrayList<Fornecedor>();
-		idAtual = 0l;
-		atualizando = false;
+	}
+	
+	@PostConstruct
+	public void init() {
+		entidade = newEntidade();
+		entidades = getService().getAll();
+	}
+	
+	public void remove(Fornecedor entidade) {
+		getService().remove(entidade);
+		limpar();
 	}
 
-	public void addFornecedor() {
-		if (atualizando) {
-			for (Fornecedor fornecedor : fornecedores) {
-				if (fornecedor.equals(this.fornecedor)) {
-					fornecedor = this.fornecedor;
-				}
-			}
-		} else {
-			fornecedor.setId(idAtual);
-			fornecedores.add(fornecedor);
-			fornecedor = new Fornecedor();
-			idAtual += 1;
-		}
-		atualizando=false;
+	public Fornecedor getEntidade() {
+		return entidade;
 	}
 
-	public void removeFornecedor(Long id) {
-		for (Fornecedor fornecedor : fornecedores) {
-			if (fornecedor.getId().equals(id)) {
-				fornecedores.remove(fornecedor);
-				return;
-			}
-		}
+	public void setEntidade(Fornecedor entidade) {
+		this.entidade = entidade;
 	}
 
-	public void atualizarFornecedor(Long id) {
-		for (Fornecedor fornecedor : fornecedores) {
-			if (fornecedor.getId().equals(id)) {
-				this.fornecedor = fornecedor;
-				atualizando = true;
-			}
-		}
+	public Collection<Fornecedor> getEntidades() {
+		return entidades;
 	}
 
-	public String buscarFornecedor(Long id) {
-		for (Fornecedor fornecedor : fornecedores) {
-			if (fornecedor.getId().equals(id)) {
-				return fornecedor.toString();
-			}
-		}
-		return null;
+	public void setEntidades(Collection<Fornecedor> entidades) {
+		this.entidades = entidades;
 	}
+
+	public void save() {
+		getService().save(entidade);
+		limpar();
+	}
+
+	public void editar(Long id) {
+		this.getEntidade().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		entidades = getService().getAll();
+		entidade = newEntidade();
+	}
+
+	protected Fornecedor newEntidade() {
+		return new Fornecedor();
+	}
+
+	public FornecedorService getService() {
+		return service;
+	}
+
 
 }

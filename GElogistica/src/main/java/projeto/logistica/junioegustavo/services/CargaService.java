@@ -22,7 +22,6 @@ public class CargaService implements Serializable ,Service<Carga>{
 	@TransacionalCdi
 	public void update(Carga e) {
 		cargaDAO.update(e);
-		
 	}
 
 	@Override
