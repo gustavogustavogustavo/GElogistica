@@ -16,6 +16,8 @@ public class Produto implements Identificavel {
 
 	@Column
 	private String nomeProduto;
+	
+	@Column(name="descricao")
 	private String desc;
 	@Id
 	private Long id;
