@@ -4,7 +4,7 @@
 	<persistence-unit name="GElogistica" transaction-type="RESOURCE_LOCAL">
 	
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<non-jta-data-source>java:/GELogistica</non-jta-data-source>
+		<non-jta-data-source>java:/GElogisticaDS</non-jta-data-source>
 	
 		<class>projeto.logistica.junioegustavo.entities.Usuario</class>
 		<class>projeto.logistica.junioegustavo.entities.Carga</class>
