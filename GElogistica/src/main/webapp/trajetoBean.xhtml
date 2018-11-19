@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>Trajetos</title>
+</h:head>
+
+<h:body>
+	<p:messages></p:messages>
+
+	<h:form>
+		<h:panelGrid columns="2">
+			<f:facet name="caption">
+				<h:outputText value="Trajetos" />
+			</f:facet>
+
+
+			<h:outputLabel value="nome: " for="nomeTrajeto" />
+			<p:inputText id="nomeTrajeto"
+				value="#{trajetoBean.entidade.nome}" label="Nome"
+				style="width:350px" />
+
+
+			<h:outputLabel value="custo: " for="custo" />
+			<p:inputText id="custo" value="#{trajetoBean.entidade.custo}"
+				label="Custo" style="width:350px" />
+
+			<p:commandButton id="btnAddBotao" value="Adicionar"
+				actionListener="#{trajetoBean.save()}" ajax="false" />
+
+
+
+		</h:panelGrid>
+
+		<p:dataTable var="trajeto" value="#{trajetoBean.entidades}"
+			border="1">
+			<p:column>
+				<f:facet name="header">Nome</f:facet>
+				<h:outputText value="#{trajeto.nome}"></h:outputText>
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">Custo</f:facet>
+				<h:outputText value="#{trajeto.custo}"></h:outputText>
+			</p:column>
+			<p:column>
+				<f:facet name="header">Opções</f:facet>
+				<p:commandButton id="btnRemoveBotao" value="Remover"
+					actionListener="#{trajetoBean.removeTrajeto(trajeto.id)}"
+					ajax="false" />
+				<p:commandButton id="btnUpdateBotao" value="Atualizar"
+					actionListener="#{trajetoBean.atualizarTrajeto(trajeto.id)}"
+					ajax="false" />
+			</p:column>
+		</p:dataTable>
+
+	</h:form>
+</h:body>
+</html>
+

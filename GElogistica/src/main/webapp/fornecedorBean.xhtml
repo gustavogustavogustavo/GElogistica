@@ -19,21 +19,21 @@
 
 			<h:outputLabel value="Nome: " for="nomeFornecedor" />
 			<p:inputText id="nomeFornecedor"
-				value="#{fornecedorBean.fornecedor.nomeFornecedor}" label="Nome"
+				value="#{fornecedorBean.entidade.nomeFornecedor}" label="Nome"
 				style="width:350px" />
 
 
 			<h:outputLabel value="email: " for="email" />
-			<p:inputText id="email" value="#{fornecedorBean.fornecedor.email}"
+			<p:inputText id="email" value="#{fornecedorBean.entidade.email}"
 				label="Email" style="width:350px" />
 
 			<h:outputLabel value="telefone: " for="telefoneFornecedor" />
 			<p:inputText id="telefoneFornecedor"
-				value="#{fornecedorBean.fornecedor.telefone}" label="Telefone"
+				value="#{fornecedorBean.entidade.telefone}" label="Telefone"
 				style="width:350px" />
 			<h:outputLabel value="endereço " for="enderecoFornecedor" />
 			<p:inputText id="enderecoFornecedor"
-				value="#{fornecedorBean.fornecedor.endereço}" label="Endereço"
+				value="#{fornecedorBean.entidade.endereço}" label="Endereço"
 				style="width:350px" />
 
 			<p:commandButton id="btnAddBotao" value="Adicionar"
@@ -43,7 +43,7 @@
 
 		</h:panelGrid>
 
-		<p:dataTable var="fornecedor" value="#{fornecedorBean.fornecedores}"
+		<p:dataTable var="fornecedor" value="#{fornecedorBean.entidades}"
 			border="1">
 			<p:column>
 				<f:facet name="header">Nome</f:facet>

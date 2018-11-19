@@ -3,6 +3,8 @@ package projeto.logistica.junioegustavo.services;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import projeto.logistica.junioegustavo.DAO.TrajetoDAO;
 import projeto.logistica.junioegustavo.entities.Trajeto;
 import projeto.logistica.junioegustavo.util.TransacionalCdi;
@@ -10,6 +12,8 @@ import projeto.logistica.junioegustavo.util.TransacionalCdi;
 public class TrajetoService implements Serializable ,Service<Trajeto>{
 
 	private static final long serialVersionUID = -7803325791425670859L;
+	
+	@Inject
 	private TrajetoDAO trajetoDAO;
 	
 	@Override

@@ -9,11 +9,12 @@ import projeto.logistica.junioegustavo.entities.Identificavel;
 
 @Entity
 
-public class Trajeto implements Identificavel{
+public class Trajeto implements Identificavel {
 
 	@Column
 	@Id
 	private Long id;
+	private String nome;
 	private ArrayList<String> cidades;
 	private Double custo;
 
@@ -39,6 +40,14 @@ public class Trajeto implements Identificavel{
 
 	public void setCusto(Double custo) {
 		this.custo = custo;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }
