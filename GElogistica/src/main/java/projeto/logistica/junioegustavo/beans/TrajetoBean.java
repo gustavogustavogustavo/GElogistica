@@ -1,18 +1,19 @@
 package projeto.logistica.junioegustavo.beans;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.SessionScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import projeto.logistica.junioegustavo.entities.Trajeto;
 import projeto.logistica.junioegustavo.services.TrajetoService;
 
-@SessionScoped
+@ViewScoped
 @Named
-public class TrajetoBean {
+public class TrajetoBean implements Serializable{
 	
 	@Inject 
 	private TrajetoService service;
