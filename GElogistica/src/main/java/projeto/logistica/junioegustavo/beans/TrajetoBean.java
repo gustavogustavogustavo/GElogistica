@@ -1,19 +1,17 @@
 package projeto.logistica.junioegustavo.beans;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import projeto.logistica.junioegustavo.entities.Trajeto;
 import projeto.logistica.junioegustavo.services.TrajetoService;
 
+@SessionScoped
 @Named
-@ApplicationScoped
 public class TrajetoBean {
 	
 	@Inject 

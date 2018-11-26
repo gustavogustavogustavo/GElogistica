@@ -3,7 +3,9 @@ package projeto.logistica.junioegustavo.entities;
 import java.util.ArrayList;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 import projeto.logistica.junioegustavo.entities.Identificavel;
 
@@ -13,6 +15,8 @@ public class Trajeto implements Identificavel {
 
 	@Column
 	@Id
+	@GeneratedValue(generator="trajetoGen")
+	@SequenceGenerator(name="trajetoGen", sequenceName="trajeto_seq")
 	private Long id;
 	private String nome;
 	private ArrayList<String> cidades;
