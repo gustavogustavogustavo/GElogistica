@@ -1,6 +1,7 @@
 package projeto.logistica.junioegustavo.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
@@ -28,6 +29,7 @@ public class TrajetoBean implements Serializable{
 	@PostConstruct
 	public void init() {
 		entidade = newEntidade();
+		entidade.setCidades(new ArrayList<>());
 		entidades = getService().getAll();
 	}
 	

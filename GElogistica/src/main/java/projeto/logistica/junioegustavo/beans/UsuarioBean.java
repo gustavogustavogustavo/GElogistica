@@ -28,7 +28,6 @@ public class UsuarioBean implements Serializable {
 	protected Usuario entidade;
 
 	protected Collection<Usuario> entidades;
-
 	public UsuarioBean() {
 	}
 	

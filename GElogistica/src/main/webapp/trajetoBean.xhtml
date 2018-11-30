@@ -11,19 +11,38 @@
 	<p:messages></p:messages>
 
 	<h:form>
-		<h:panelGrid columns="2">
+		<h:panelGrid columns="3">
 			<f:facet name="caption">
 				<h:outputText value="Trajetos" />
 			</f:facet>
 
 
 			<h:outputLabel value="nome: " for="nomeTrajeto" />
-			<p:inputText id="nomeTrajeto"
-				value="#{trajetoBean.entidade.nome}" label="Nome"
-				style="width:350px" />
+			<p:inputText id="nomeTrajeto" value="#{trajetoBean.entidade.nome}"
+				label="Nome" style="width:350px" /><a></a>
 
+			<h:outputLabel value="Cidade: " for="cidade" />
+			<p:inputText id="cidade" label="Custo" style="width:350px" />
+			<p:commandButton id="btnAddCidade" for="cidade"
+				value="Adicionar Cidade"
+				actionListener="#{trajetoBean.entidade.cidades.add(cidade.text)}"
+				ajax="false" />
+			<a></a>
+			<p:dataTable var="cidade" value="#{trajetoBean.entidade.cidades}"
+				border="1">
+				<p:column>
+					<f:facet name="header">Cidades</f:facet>
+					<h:outputText value="#{cidade.toString()}"></h:outputText>
+				</p:column>
+				<p:column>
+					<f:facet name="header">Opções</f:facet>
+					<p:commandButton id="btnRemoveBotao" value="Remover"
+						actionListener="#{trajetoBean.entidade.cidades.remove(cidade)}"
+						ajax="false" />
+				</p:column>
+			</p:dataTable>
 
-			<h:outputLabel value="custo: " for="custo" />
+			<h:outputLabel value="Custo: " for="custo" />
 			<p:inputText id="custo" value="#{trajetoBean.entidade.custo}"
 				label="Custo" style="width:350px" />
 
@@ -34,8 +53,7 @@
 
 		</h:panelGrid>
 
-		<p:dataTable var="trajeto" value="#{trajetoBean.entidades}"
-			border="1">
+		<p:dataTable var="trajeto" value="#{trajetoBean.entidades}" border="1">
 			<p:column>
 				<f:facet name="header">Nome</f:facet>
 				<h:outputText value="#{trajeto.nome}"></h:outputText>
@@ -46,13 +64,15 @@
 				<h:outputText value="#{trajeto.custo}"></h:outputText>
 			</p:column>
 			<p:column>
+				<f:facet name="header">Cidades</f:facet>
+				<h:outputText value="#{trajeto.cidades}"></h:outputText>
+			</p:column>
+			<p:column>
 				<f:facet name="header">Opções</f:facet>
 				<p:commandButton id="btnRemoveBotao" value="Remover"
-					actionListener="#{trajetoBean.removeTrajeto(trajeto.id)}"
-					ajax="false" />
+					actionListener="#{trajetoBean.remove(trajeto)}" ajax="false" />
 				<p:commandButton id="btnUpdateBotao" value="Atualizar"
-					actionListener="#{trajetoBean.atualizarTrajeto(trajeto.id)}"
-					ajax="false" />
+					actionListener="#{trajetoBean.editar(trajeto.id)}" ajax="false" />
 			</p:column>
 		</p:dataTable>
 
