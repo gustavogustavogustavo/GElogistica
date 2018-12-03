@@ -14,25 +14,38 @@ import projeto.logistica.junioegustavo.services.TrajetoService;
 
 @ViewScoped
 @Named
-public class TrajetoBean implements Serializable{
-	
-	@Inject 
+public class TrajetoBean implements Serializable {
+
+	@Inject
 	private TrajetoService service;
-	
+
 	protected Trajeto entidade;
 
 	protected Collection<Trajeto> entidades;
+	
+	private String cidade;
+	
+	public String getCidade() {
+		return cidade;
+	}
+	
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
 
 	public TrajetoBean() {
 	}
-	
+
 	@PostConstruct
 	public void init() {
 		entidade = newEntidade();
-		entidade.setCidades(new ArrayList<>());
+		ArrayList<String> cidades = new ArrayList<>();
+		cidades.add("esperança");
+		cidades.add("picui");
+		entidade.setCidades(cidades);
 		entidades = getService().getAll();
 	}
-	
+
 	public void remove(Trajeto entidade) {
 		getService().remove(entidade);
 		limpar();
@@ -75,5 +88,13 @@ public class TrajetoBean implements Serializable{
 
 	public TrajetoService getService() {
 		return service;
+	}
+
+	public String showCidades(ArrayList<String> cidades) {
+		StringBuilder showCidades = new StringBuilder();
+		for (String cidade : cidades) {
+			showCidades.append(cidade + "; ");
+		}
+		return showCidades.toString();
 	}
 }

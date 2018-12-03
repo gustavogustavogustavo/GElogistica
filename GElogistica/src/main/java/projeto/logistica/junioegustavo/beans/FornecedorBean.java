@@ -1,5 +1,6 @@
 package projeto.logistica.junioegustavo.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -14,7 +15,7 @@ import projeto.logistica.junioegustavo.services.FornecedorService;
 
 @Named
 @ApplicationScoped
-public class FornecedorBean {
+public class FornecedorBean implements Serializable{
 	
 	@Inject
 	private FornecedorService service;

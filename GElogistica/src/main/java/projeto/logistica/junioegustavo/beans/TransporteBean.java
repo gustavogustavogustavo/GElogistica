@@ -1,5 +1,6 @@
 package projeto.logistica.junioegustavo.beans;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
@@ -11,7 +12,7 @@ import projeto.logistica.junioegustavo.entities.Transporte;
 import projeto.logistica.junioegustavo.services.TransporteService;
 @Named
 @ApplicationScoped
-public class TransporteBean {
+public class TransporteBean implements Serializable{
 	
 	@Inject
 	private TransporteService service;

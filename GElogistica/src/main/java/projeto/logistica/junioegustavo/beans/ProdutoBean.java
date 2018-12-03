@@ -1,5 +1,6 @@
 package projeto.logistica.junioegustavo.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -15,7 +16,7 @@ import projeto.logistica.junioegustavo.services.ProdutoService;
 @Named
 @ApplicationScoped
 
-public class ProdutoBean {
+public class ProdutoBean implements Serializable{
 	
 	@Inject
 	private ProdutoService service;

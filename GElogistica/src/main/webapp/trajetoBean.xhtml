@@ -22,17 +22,18 @@
 				label="Nome" style="width:350px" /><a></a>
 
 			<h:outputLabel value="Cidade: " for="cidade" />
-			<p:inputText id="cidade" label="Custo" style="width:350px" />
+			<p:inputText id="cidade" label="Custo" style="width:350px" value="#{trajetoBean.cidade}" />
+			
 			<p:commandButton id="btnAddCidade" for="cidade"
 				value="Adicionar Cidade"
-				actionListener="#{trajetoBean.entidade.cidades.add(cidade.text)}"
+				actionListener="#{trajetoBean.entidade.cidades.add(cidade)}"
 				ajax="false" />
 			<a></a>
 			<p:dataTable var="cidade" value="#{trajetoBean.entidade.cidades}"
 				border="1">
 				<p:column>
 					<f:facet name="header">Cidades</f:facet>
-					<h:outputText value="#{cidade.toString()}"></h:outputText>
+					<h:outputText value="#{cidade}"></h:outputText>
 				</p:column>
 				<p:column>
 					<f:facet name="header">Opções</f:facet>
@@ -40,11 +41,11 @@
 						actionListener="#{trajetoBean.entidade.cidades.remove(cidade)}"
 						ajax="false" />
 				</p:column>
-			</p:dataTable>
-
+			</p:dataTable><a></a>
+			
 			<h:outputLabel value="Custo: " for="custo" />
 			<p:inputText id="custo" value="#{trajetoBean.entidade.custo}"
-				label="Custo" style="width:350px" />
+				label="Custo" style="width:350px" /><a></a>
 
 			<p:commandButton id="btnAddBotao" value="Adicionar"
 				actionListener="#{trajetoBean.save()}" ajax="false" />
@@ -65,7 +66,7 @@
 			</p:column>
 			<p:column>
 				<f:facet name="header">Cidades</f:facet>
-				<h:outputText value="#{trajeto.cidades}"></h:outputText>
+				<h:outputText value="#{trajetoBean.showCidades(trajeto.cidades)}"></h:outputText>
 			</p:column>
 			<p:column>
 				<f:facet name="header">Opções</f:facet>
